@@ -5,27 +5,23 @@ import { Home } from '../Home';
 import { Reservation } from '../Reservation';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+  },
+  {
+    path: '/reservation',
+    element: <Reservation />
+  },
+])
+
 export const App = () => {
-
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Home />,
-    },
-    {
-      path: '/reservation',
-      element: <Reservation />
-    },
-  ])
-
  return (
     <>
       <Header />
       <RouterProvider router={router} />
       <Footer />
     </>
- )
-
- 
-  
+ ) 
 };
