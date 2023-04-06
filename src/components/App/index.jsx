@@ -2,7 +2,8 @@ import React from 'react';
 import { Footer } from '../Footer';
 import { Header } from '../Header';
 import { Home } from '../Home';
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Reservation } from '../Reservation';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 export const App = () => {
 
@@ -13,7 +14,7 @@ export const App = () => {
     },
     {
       path: '/reservation',
-      element: <h2>Detail jízdenky</h2>
+      element: <Reservation />
     },
   ])
 
