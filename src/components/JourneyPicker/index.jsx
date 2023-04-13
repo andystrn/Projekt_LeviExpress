@@ -23,7 +23,9 @@ export const JourneyPicker = ({ onJourneyChange }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(fromCity, toCity, date);
+    fetch(`https://apps.kodim.cz/daweb/leviexpress/api/journey?fromCity=${fromCity}&toCity=${toCity}&date=${date}`)
+    .then(response => response.json())
+    .then(data => onJourneyChange(data.results));
   }
 
   const CityOptions = ( {cities} ) => {
@@ -39,10 +41,12 @@ export const JourneyPicker = ({ onJourneyChange }) => {
     return (
       <>
         <option value="">Vyberte</option>
-        {dates.map(d => <option key={d.dateBasic} value={d.dataBasic}>{d.dateCs}</option>)}     
+        {dates.map(d => <option key={d.dateBasic} value={d.dateBasic}>{d.dateCs}</option>)}     
       </>
   )
   }
+
+  let isDisabled = fromCity === "" || toCity === "" || date === "";
 
   return (
     <div className="journey-picker container">
@@ -52,7 +56,6 @@ export const JourneyPicker = ({ onJourneyChange }) => {
           <label>
             <div className="journey-picker__label">Odkud:</div>
             <select value={fromCity} onChange={(e) => setFromCity(e.target.value)}>
-              <option value="">Vyberte</option>
               <CityOptions cities={cities}/>
             </select>
           </label>
@@ -70,6 +73,7 @@ export const JourneyPicker = ({ onJourneyChange }) => {
           </label>
           <div className="journey-picker__controls">
             <button 
+              disabled={isDisabled}
               className="btn" 
               type="submit"
             > 
